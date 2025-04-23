@@ -4,7 +4,7 @@ import moment = require("moment");
 
 
 export async function Metric(myTimer: Timer, context: InvocationContext): Promise<void> {
-    const apiEndpoint = "https://myriadai-call-microservice-development.azurewebsites.net/queue/scheduleAsync";
+    const apiEndpoint = "https://myriad-admin-server.azurewebsites.net/call-metrics/generate";
 
     // Define tenantIDs
     const tenantIDs = ["0001", "0002", "0003", "0004", "0005", "0006", "0007"];
@@ -20,7 +20,7 @@ export async function Metric(myTimer: Timer, context: InvocationContext): Promis
                     date: yesterdayDate,
                     scheduleTime: new Date().toISOString(),
                     triggeredBy: "system",
-                    isLive
+                    isLiveMode: isLive
                 };
 
                 requests.push(

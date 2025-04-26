@@ -9,7 +9,9 @@ export async function Metric(myTimer: Timer, context: InvocationContext): Promis
     // Define tenantIDs
     const tenantIDs = ["0001", "0002", "0003", "0004", "0005", "0006", "0007"];
     const yesterdayDate = moment().subtract(1, 'day').format('YYYY-MM-DD');
-
+    // 🕰️ Print current IST time
+    const currentISTTime = moment().utcOffset("+05:30").format('YYYY-MM-DD HH:mm:ss');
+    context.log(`🕰️ Current IST Time: ${currentISTTime}`);
     try {
         const requests = [];
 

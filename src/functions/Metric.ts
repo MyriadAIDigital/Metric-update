@@ -4,7 +4,8 @@ import moment = require("moment");
 
 
 export async function Metric(myTimer: Timer, context: InvocationContext): Promise<void> {
-    const apiEndpoint = "https://myriad-admin-server.azurewebsites.net/call-metrics/generate";
+    const apiEndpoint = process.env.API_ENDPOINT;
+    context.log(`POST request apiEndpoint ${apiEndpoint}`)
 
     // Define tenantIDs
     const tenantIDs = ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008"];

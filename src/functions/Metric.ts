@@ -4,12 +4,15 @@ import moment = require("moment");
 
 
 export async function Metric(myTimer: Timer, context: InvocationContext): Promise<void> {
-    const apiEndpoint = "https://myriadai-call-microservice-development.azurewebsites.net/queue/scheduleAsync";
+    const apiEndpoint = process.env.API_ENDPOINT;
+    context.log(`POST request apiEndpoint ${apiEndpoint}`)
 
     // Define tenantIDs
-    const tenantIDs = ["0001", "0002", "0003", "0004", "0005", "0006", "0007"];
-    const yesterdayDate = moment().subtract(1, 'day').format('YYYY-MM-DD');
-
+    const tenantIDs = ["0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008"];
+    const yesterdayDate = moment().format('YYYY-MM-DD');
+    // 🕰️ Print current IST time
+    const currentISTTime = moment().utcOffset("+05:30").format('YYYY-MM-DD HH:mm:ss');
+    context.log(`🕰️ Current IST Time: ${currentISTTime}`);
     try {
         const requests = [];
 
@@ -20,7 +23,7 @@ export async function Metric(myTimer: Timer, context: InvocationContext): Promis
                     date: yesterdayDate,
                     scheduleTime: new Date().toISOString(),
                     triggeredBy: "system",
-                    isLive
+                    isLiveMode: isLive
                 };
 
                 requests.push(
